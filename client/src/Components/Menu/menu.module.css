@@ -1,0 +1,33 @@
+.menu {
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  background-color: #3f51b5;
+  height: 100%;
+  width: 20%;
+  position: absolute;
+  top: 63px;
+  left: 0;
+  z-index: 50;
+  transform: translateX(0);
+  box-shadow: 5px 0px 8px -3px rgba(50, 50, 50, 0.75);
+  transition: 0.2s;
+}
+.menu_active {
+  position: absolute;
+  transform: translateX(-130%);
+  transition: 0.2s;
+}
+.menuLink {
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    width: 100%
+  }
+}

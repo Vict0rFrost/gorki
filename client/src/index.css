@@ -1,0 +1,10 @@
+* {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+body {
+  margin: 0;
+  background-color: #ecf0f1;
+  overflow-x: hidden;
+}
+

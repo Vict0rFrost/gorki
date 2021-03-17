@@ -1,0 +1,9 @@
+.avatar {
+  width: 250px !important;
+  height: 250px !important;
+}
+.fotoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

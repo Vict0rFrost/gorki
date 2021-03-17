@@ -1,0 +1,10 @@
+.profile {
+  display: flex;
+  justify-content: space-around;
+}
+.userInfo {
+  text-align: center;
+}
+.comp {
+  text-align: center;
+}

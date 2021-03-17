@@ -1,0 +1,58 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  background-color: #3f51b5;
+  height: 100%;
+  width: 25%;
+  position: absolute;
+  top: 63px;
+  right: 0;
+  z-index: 50;
+  transform: translateX(0);
+  box-shadow: 5px 0px 8px -3px rgba(50, 50, 50, 0.75);
+  transition: 0.2s;
+}
+.menu_active {
+  position: absolute;
+  right: 0;
+  transform: translateX(160%);
+  transition: 0.2s;
+}
+.menuLink {
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
+}
+.content {
+  text-align: center;
+  color: white;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.image {
+  width: 300px;
+  height: 250px;
+}
+.geo {
+  color: white;
+  font-size: 50px;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 5px 5px;
+  margin: 10px;
+  cursor: pointer;
+}
+.map {
+  width: 300px;
+  height: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    width: 100%
+  }
+}
