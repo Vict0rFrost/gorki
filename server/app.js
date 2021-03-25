@@ -2,12 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const passport = require("passport");
-// const authRouter = require("./routes/auth");
-// const passportSetup = require("./config/passport");
-const userRouter = require('./routes/user');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+
+const passport = require("passport");
+const passportSetup = require("./passport/passport");
+
+const authRouter = require("./routes/auth");
+const userRouter = require('./routes/user');
+const cardsRouter = require('./routes/card');
+
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
@@ -38,7 +42,7 @@ app.set("sessionName", "sid");
 app.use(
   session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    secret: "Gorki",
+    secret: process.env.SECRET,
     name: app.get("sessionName"),
     resave: false,
     saveUninitialized: false,
@@ -46,18 +50,20 @@ app.use(
   })
 );
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
-const checkUser = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect("http://localhost:3000/signin");
-  }
-};
+// const checkUser = (req, res, next) => {
+//   if (req.user) {
+//     next();
+//   } else {
+//     res.redirect("http://localhost:3000/signin");
+//   }
+// };
 
 app.use("/user", userRouter);
+app.use("/cards", cardsRouter);
+app.use("/auth", authRouter);
 
 app.listen(PORT, () => {
   console.log("Server has been started on port: ", PORT);

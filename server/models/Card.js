@@ -2,13 +2,18 @@ const mongoose = require('mongoose');
 
 const Card = mongoose.model('Gorka', {
   adress: {
-    type: String,
-    require: true,
+    latitude: {
+      type: Number,
+      require: true,
+    },
+    longitude: {
+      type: Number,
+      require: true,
+    }
   },
   image: {
     type: String,
   },
-  description: String,
   author: { type: mongoose.ObjectId, ref: 'User' },
   likes: [{ type: mongoose.ObjectId, ref: 'User' }]
 });
