@@ -28,50 +28,63 @@ export default function CardForm({ active, setActive }) {
   }
 
   const geoLocation = async () => {
-    const successCallback = (position) => {
-      setLatitude(position?.coords?.latitude);
-      setLongitude(position?.coords?.longitude);
+    const successCallback = async (position) => {
+      await setLatitude(position?.coords?.latitude);
+      await setLongitude(position?.coords?.longitude);
       console.log(latitude, longitude);
     }
     const errorCallback = (error) => {
       console.log(error);
     }
-    navigator.geolocation.getCurrentPosition( successCallback, errorCallback )
+    navigator.geolocation?.getCurrentPosition( successCallback, errorCallback )
   }
 
   return (
 
     <div className={ active? styles.menu : styles.menu_active } onClick={() => setActive(false)}>
       <div onClick={(e) => e.stopPropagation()}>
-        <div className={styles.content}>
-          <h3>Добавить горку</h3>
+        {userSession && userSession ? (
 
-          <form className={styles.form} noValidate autoComplete="off">
-            <div>
-              <img src={ `http://localhost:3001/images/${image}` } alt="img" className={styles.image} />
+          <div className={styles.content}>
+            <h3>Добавить горку</h3>
+
+            <form className={styles.form} noValidate autoComplete="off">
+              <div>
+                <img src={ `http://localhost:3001/images/${image}` } alt="img" className={styles.image} />
+              </div>
+              <input 
+                className={`btn btn-primary ${styles.button}`}  
+                type="file" id="file" 
+                name="filedata" 
+                accept=".jpg" 
+                placeholder="HELLO" 
+                onChange={(event) => {
+                  const file = event.target.files[0];
+                  setFile(file)
+                }}
+              />
+
+              <Button 
+                variant="contained" 
+                color="primary" 
+                component="span" 
+                onClick={(event) => sendCard(event)}
+              >
+                Опубликовать
+              </Button>
+            </form>
+          </div>
+        ) : 
+          <>
+            <div className={styles.info}>
+              <div className={styles.infoBlock}>
+                <h3>Чтобы добавить горку надо войти в систему</h3>
+              </div>
             </div>
-            <input className={`btn btn-primary ${styles.button}`}  type="file" id="file" name="filedata" accept=".jpg" placeholder="HELLO" onChange={(event) => {
-              const file = event.target.files[0];
-              setFile(file)
-            }} />
-            
-            <button type="button" className="btn btn-primary" onClick={(event) => sendCard(event)}>Обновить фотографию</button>
-            
-            {/* <div>
-              <NearMeIcon className={styles.geo} onClick={() => { geoLocation() }} />
-            </div> */}
+          </>
 
-            <Button 
-            variant="contained" 
-            color="primary" 
-            component="span" 
-            onClick={(event) => sendCard(event)}
-            >
-              Опубликовать
-            </Button>
-          </form>
+        }
 
-        </div>
       </div>
     </div>
   );

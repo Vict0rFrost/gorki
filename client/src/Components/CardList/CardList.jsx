@@ -14,7 +14,7 @@ function CardList() {
   
   useEffect(() => {
     dispatch(getAllCards())
-  }, [dispatch])
+  }, [dispatch, cards])
   
 
   return (
@@ -27,11 +27,11 @@ function CardList() {
           <li className={styles.card} key={el._id}>
             <CardComponent
               id={ el?._id } 
-              adress={ el.adress } 
-              image={ el.image } 
-              author={ el.author.login } 
-              likes={ el.likes.length }
-              avatar={ el.author.avatar } 
+              adress={ el?.adress } 
+              image={ el?.image } 
+              author={ el?.author?.login } 
+              likes={ el?.likes?.length }
+              avatar={ el?.author?.avatar } 
             />
           </li>
         ))}

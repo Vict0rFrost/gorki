@@ -9,6 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { signinUser } from '../../redux/actionCreators/authCreator';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -30,8 +35,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const dispatch = useDispatch()
   const classes = useStyles();
+  const history = useHistory()
 
+  const [input, setInput] = useState({
+    email: '',
+    password: '',
+  })
+
+  const inputHandler = (event) => {
+    setInput(prev => {
+      return { ...prev, [event.target.name]: event.target.value }
+    })
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -53,6 +70,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={inputHandler}
           />
           <TextField
             variant="outlined"
@@ -64,6 +82,7 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={inputHandler}
           />
           <Button
             type="submit"
@@ -71,6 +90,9 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={(e) => { 
+              e.preventDefault()
+              dispatch(signinUser(input, history)) }}
           >
             Войти
           </Button>

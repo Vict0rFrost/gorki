@@ -13,21 +13,26 @@
   transform: translateX(0);
   box-shadow: 5px 0px 8px -3px rgba(50, 50, 50, 0.75);
   transition: 0.2s;
+  text-align: center;
+  color: white;
 }
 .menu_active {
   position: absolute;
   right: 0;
   transform: translateX(160%);
   transition: 0.2s;
+  text-align: center;
+  color: white;
 }
 .menuLink {
   padding: 10px 0;
   color: white;
   text-decoration: none;
 }
-.content {
+.info {
   text-align: center;
   color: white;
+  width: 300px;
 }
 .form {
   display: flex;

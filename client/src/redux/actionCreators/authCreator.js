@@ -41,6 +41,8 @@ export function regNewUser(input, history) {
 }
 
 export const signinUser = (inputValue, history, setErrorValue) => {
+  console.log(inputValue);
+
   return async (dispatch) => {
     try {
       const response = await fetch('http://localhost:3001/auth/signin', {
@@ -53,6 +55,7 @@ export const signinUser = (inputValue, history, setErrorValue) => {
         body: JSON.stringify(inputValue),
       });
       const result = await response.json();
+      console.log(result);
       const user = result.user;
       dispatch({ 
         type: SIGNIN, 
@@ -66,6 +69,7 @@ export const signinUser = (inputValue, history, setErrorValue) => {
 };
 
 export const logoutUser = () => {
+  
   return async (dispatch) => {
     await fetch('http://localhost:3001/auth/logout', {
       method: "GET",

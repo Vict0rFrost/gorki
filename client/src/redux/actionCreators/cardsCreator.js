@@ -57,7 +57,7 @@ export function addLike(cardId, userId) {
       }),
     });
     const result = await request.json();
-    console.log(result);
+    
     dispatch({
       type: ADD_LIKE,
       payload: result,

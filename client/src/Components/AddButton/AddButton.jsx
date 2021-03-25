@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './addButton.module.css';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -21,10 +22,10 @@ export default function FloatingActionButtons({ active, setActive}) {
   return (
     <div className={styles.addButton} onClick={() => setActive(!active)}>
       <div className={classes.root}>
-      <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>
-    </div>
+        <Fab color="primary" aria-label="add">
+          <AddIcon />
+        </Fab>
+      </div>  
     </div>
   );
 }

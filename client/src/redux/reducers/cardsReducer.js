@@ -8,7 +8,7 @@ export default function getCards(state = {}, action) {
       }
     case NEW_CARD:
       return {...state, 
-        allCards: action.payload 
+        allCards: [...state.allCards, action.payload] 
       }
     case MY_CARDS:
       return {...state, 
@@ -18,11 +18,10 @@ export default function getCards(state = {}, action) {
       return {...state, 
         favoriteCards: action.payload 
       }
-    // case ADD_LIKE: 
-      
-    //   return {...state,
-    //     allCards.indexOf(action.payload) 
-    //   }
+    case ADD_LIKE:
+      return {...state,
+        allCards: [...state.allCards]
+      }
     default:
       return state;
   }

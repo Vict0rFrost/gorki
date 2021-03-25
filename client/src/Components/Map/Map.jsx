@@ -1,6 +1,6 @@
 import styles from '../Map/map.module.css';
 import { useState, useEffect } from 'react';
-import { YMaps, Map, Placemark, GeolocationControl, ZoomControl, Clusterer, RoutePanel } from "react-yandex-maps";
+import { YMaps, Map, Placemark, GeolocationControl, ZoomControl } from "react-yandex-maps";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCards } from '../../redux/actionCreators/cardsCreator';
 
@@ -31,35 +31,26 @@ function YaMap() {
           className={styles.map}
           modules={["control.ZoomControl", "control.FullscreenControl"]}
         >
-          {/* <RoutePanel options={{ float: 'right' }} /> */}
-          {/* <Clusterer
+          
+        {coordinates?.map((el) => 
+          <Placemark
+            modules={["geoObject.addon.balloon", "geoObject.addon.hint"]} 
+            geometry={[el.adress.latitude, el.adress.longitude]} 
+            key={el.index}
+            properties={{
+              item: el.index,
+              balloonContentHeader: `Горка на ${el.adress.latitude}, ${el.adress.longitude}`,
+              balloonContentBody: `<img src="http://localhost:3001/images/${el.image}" className={styles.img}>`,
+              balloonContentFooter: `Оценило людей: ${el.likes.length}`
+            }}
             options={{
-              preset: "islands#invertedVioletClusterIcons",
-              groupByCoordinates: true,
               balloonPanelMaxMapArea: Infinity
             }}
-          > */}
-
-            {coordinates?.map((el) => 
-              <Placemark
-                modules={["geoObject.addon.balloon", "geoObject.addon.hint"]} 
-                geometry={[el.adress.latitude, el.adress.longitude]} 
-                key={el.index}
-                properties={{
-                  item: el.index,
-                  balloonContentHeader: `Горка на ${el.adress.latitude}, ${el.adress.longitude}`,
-                  balloonContentBody: `<img src="http://localhost:3001/images/${el.image}" className={styles.img}>`,
-                  balloonContentFooter: `Оценило людей: ${el.likes.length}`
-                }}
-                options={{
-                  balloonPanelMaxMapArea: Infinity
-                }}
-              />
-            )}
-
-          {/* </Clusterer> */}
-          <GeolocationControl options={{ float: 'left' }} />
-          <ZoomControl options={{ float: 'right' }} />
+          />
+        )}
+          
+        <GeolocationControl options={{ float: 'left' }} />
+        <ZoomControl options={{ float: 'right' }} />
 
         </Map>
       </YMaps>

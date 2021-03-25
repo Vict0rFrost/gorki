@@ -80,7 +80,7 @@ function CardComponent(props) {
             <FavoriteIcon />
           </IconButton>
           <p>{props.likes}</p>
-          <IconButton aria-label="share">
+          {/* <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
           <IconButton
@@ -92,7 +92,7 @@ function CardComponent(props) {
             aria-label="show more"
           >
             <ExpandMoreIcon />
-          </IconButton>
+          </IconButton> */}
         </CardActions>
       </Card>
 
